@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const ejs = require('ejs');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 require('./config/passport')(passport);
 const auth = require('./routes/auth');
+const index = require('./routes/index');
 const keys = require('./config/keys');
 const User = require('./models/user');
 
@@ -19,6 +21,7 @@ mongoose.connect(keys.mongoURI, {
 
     });
 const app = express();
+app.set("view engine", "ejs");
 app.use(cookieParser());
 app.use(session({
     secret: 'serc',
@@ -34,11 +37,10 @@ app.use((req, res, next) => {
     res.locals.user = req.user || null;
     next();
 });
+
 const port = process.env.PORT || 3000;
 app.use('/auth', auth);
-app.get('/', (req, res) => {
-    res.send('ok');
-})
+app.use('/', index);
 
 
 
