@@ -44,4 +44,5 @@ const StorySchema = new Schema({
 });
 
 // Create collection and add schema
-mongoose.model('stories', StorySchema, 'stories');
+var Story = mongoose.model('stories', StorySchema, 'stories');
+module.exports = Story;
