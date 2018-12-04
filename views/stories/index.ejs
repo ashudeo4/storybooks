@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <%for(var i=0;i< stories.length;i++){%>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h2 class="card-title">
+                                <%=stories[i].title%>
+                            </h2>
+                            <p class="card-text">
+                                <%=stories[i].body.replace(/(<([^>]+)>)/ig,"")%>
+                            </p>
+                            <h6>
+                                <%=user.firstName%>
+                            </h6>
+                            <div class="btn btn-dark">
+                                <a href="/stories/show/<%=stories[i].id%>   ">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+            </div>
+
+        </div>
+
+    </div>
+    <% include ../partials/footer %>
