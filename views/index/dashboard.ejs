@@ -1,11 +1,59 @@
 <% include ../partials/header %>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Welcome
+                    <%=user.firstName%>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Your Stories</h4>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(var i=0;i< stories.length;i++){%>
+                        <tr>
+                            <td>
+                                <a href="/stories/show/<%=stories[i]._id%>">
+                                    <%=stories[i].title%>
+                                </a>
 
-    <h2>Welcome
-        <%=user.firstName%>
-    </h2>
-    <h4>Your Stories</h4>
+                            </td>
+                            <td>
+                                <%=stories[i].date%>
+                            </td>
+                            <td>
+                                <%=stories[i].status%>
+                            </td>
+                            <td>
+                                <a href="/stories/edit/<%=stories[i]._id%>">
+                                    Edit
+                                </a>
+                                <form action="/stories/<%=stories[i]._id%>?_method=DELETE" method="post">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
 
+                        <%}%>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
 

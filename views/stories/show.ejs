@@ -16,18 +16,44 @@
                         </p>
                     </div>
                 </div>
+                <%if(story.allowComments){%>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Comments</h5>
+                            <%if(user){%>
+                                <form action="/stories/comment/<%=story.id%>" method="POST">
+                                    <div class="form-group">
+                                        <textarea name="commentBody" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <input type="submit" value="submit" class="btn">
+                                </form>
+                                <%}else{%>
+                                    <p>Please <a href="/auth/google">log</a>in to leave a comment</p>
+                                    <%}%>
+                        </div>
+                    </div>
+                    <%}%>
             </div>
-            <div class="col-sm-4">
+            <%for(var i=0;i< story.comments;i++){%>
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="<%=story.user.image%>" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-text">
-                            <%=story.user.firstName%>
-                                <%=story.user.lastName%>
+                            <%= story.commentBody%>
                         </p>
                     </div>
                 </div>
-            </div>
+                <%}%>
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="<%=story.user.image%>" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <%=story.user.firstName%>
+                                        <%=story.user.lastName%>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
         </div>
     </div>
 

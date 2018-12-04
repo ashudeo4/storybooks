@@ -20,6 +20,8 @@ router.get('/', ensureGuest, (req, res) => {
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     Story.find({ user: req.user.id })
         .then(stories => {
+            console.log(stories);
+
             res.render('index/dashboard', {
                 stories: stories
             });

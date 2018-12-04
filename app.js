@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require("path");
 require('./config/passport')(passport);
+var methodOverride = require('method-override')
 const auth = require('./routes/auth');
 const index = require('./routes/index');
 const keys = require('./config/keys');
@@ -35,6 +36,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+app.use(methodOverride('_method'))
 app.use(bodyParser.json())
 app.use(passport.initialize());
 app.use(passport.session());
